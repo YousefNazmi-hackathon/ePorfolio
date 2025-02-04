@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple iPhones</title>
+    <style>
+        body {
+            background-color: rgb(245, 245, 220);
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Centralized Navbar */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .topnav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            border-radius: 25px;
+            padding: 10px;
+            position: absolute;
+            width: 200px;
+            height: 50px;
+            top: 10px;
+            transition: all 0.5s ease-in-out;
+            transform-origin: left center;
+        }
+
+        /* Expanded State for All Screens */
+        .topnav.expanded {
+            width: 100%;
+            height: auto;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 10px;
+            margin-top: 10px; /* Adjust to avoid being too high on mobile */
+            transform: translateY(-30px); /* Move it upwards */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            top: 50px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            min-width: 200px;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown.open .dropdown-content {
+            display: block;
+            opacity: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Toggle Button */
+        .toggle-button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-button:hover {
+            background-color: #555;
+        }
+
+        /* For Mobile Devices */
+        @media screen and (max-width: 768px) {
+            .topnav {
+                width: 100%;
+                height: auto;
+                padding: 15px;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px; /* Adjust top margin for mobile */
+            }
+
+            .dropdown-content {
+                width: 100%; /* Full width for mobile */
+                position: relative;
+                top: 0;
+                opacity: 0; /* Hidden by default */
+                display: none; /* Hide dropdown */
+            }
+
+            .topnav.expanded .dropdown-content {
+                display: block; /* Show the dropdown when expanded */
+                width: 100%; /* Ensure it fills the screen */
+            }
+        }
+
+        /* For Tablet and PC (non-mobile) */
+        @media screen and (min-width: 769px) {
+            .dropdown-content {
+                display: none; /* Hide dropdown for PC/tablet */
+            }
+
+            .topnav.expanded .dropdown-content {
+                display: none; /* Ensure dropdown does not show */
+            }
+
+            /* Display links inline horizontally when expanded */
+            .topnav.expanded a {
+                display: inline-block;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: white;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <div class="topnav" id="navbar">
+            <div class="dropdown" id="menuDropdown">
+                <a href="#" class="active" onclick="toggleDropdown()">Menu</a>
+                <button class="toggle-button" onclick="toggleNavbar()">Move</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="/index.htm">Home (Page 1)</a>
+                    <a href="/index%20-%20Copy.htm">Page 2</a>
+                    <a href="#contact">Contact</a>
+                    <a href="/Youtube%20Video.html">Youtube Video</a>
+                    <a href="#more">More Option</a>
+                    <a href="#more2">More Option 2</a>
+                    <a href="#more3">More Option 3</a>
+                    <a href="#more4">More Option 4</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isExpanded = false;
+        let isDropdownOpen = false;
+
+        function toggleNavbar() {
+            const navbar = document.getElementById("navbar");
+            const menuDropdown = document.getElementById("menuDropdown");
+
+            if (isExpanded) {
+                navbar.classList.remove("expanded");
+                menuDropdown.classList.remove("open");
+            } else {
+                navbar.classList.add("expanded");
+                menuDropdown.classList.add("open");
+            }
+
+            // Toggle the expanded state
+            isExpanded = !isExpanded;
+        }
+
+        // Toggle the dropdown open or close
+        function toggleDropdown() {
+            const menuDropdown = document.getElementById("menuDropdown");
+
+            if (isDropdownOpen) {
+                menuDropdown.classList.remove("open");
+            } else {
+                menuDropdown.classList.add("open");
+            }
+
+            isDropdownOpen = !isDropdownOpen;
+        }
+    </script>
+</body>
+</html>
