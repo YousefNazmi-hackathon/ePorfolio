@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My ePorfolio</title>
+    <title>My ePortfolio</title>
     <style>
         body {
             background-color: rgb(245, 245, 220);
@@ -11,15 +11,12 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* Centralized Navbar */
         .nav-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px;
+            align-items: flex-start;
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 10px;
+            left: 10px;
             z-index: 10;
         }
 
@@ -27,53 +24,72 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             background-color: #333;
             border-radius: 25px;
-            padding: 10px;
-            position: absolute;
             width: 200px;
             height: 50px;
-            top: 10px;
-            transition: all 0.5s ease-in-out;
-            transform-origin: left center;
+            transition: height 0.4s ease-in-out;
+            transform-origin: top left;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            position: relative;
         }
 
-        /* Expanded State for All Screens */
-        .topnav.expanded {
-            width: 100%;
-            height: auto;
-            flex-direction: row;
-            justify-content: space-evenly;
-            padding: 10px;
-            margin-top: 10px;
-            transform: translateY(-30px); /* Move it upwards */
-        }
+            .topnav.expanded {
+                height: 400px; /* Increased height for more pages */
+            }
 
         .dropdown {
-            position: relative;
-            display: inline-block;
-            width: 100%;
             text-align: center;
+            width: 100%;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px; /* Keeps "Main Menu" in place */
+            width: 100%;
+            z-index: 20;
+        }
+
+            .dropdown-toggle::after {
+                content: " \25BC"; /* Downward arrow */
+                font-size: 14px;
+                margin-left: 8px;
+                color: white;
+                transition: transform 0.3s ease;
+            }
+
+        .topnav.expanded .dropdown-toggle::after {
+            transform: rotate(180deg); /* Flip arrow */
         }
 
         .dropdown-content {
             display: none;
-            position: absolute;
             background-color: #f1f1f1;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            top: 50px;
-            left: 0;
-            right: 0;
-            margin: auto;
-            min-width: 200px;
+            width: 100%;
             opacity: 0;
-            transition: all 0.3s ease-in-out;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+            position: absolute;
+            top: 50px;
+            z-index: 15;
         }
 
-        .dropdown.open .dropdown-content {
+        .topnav.expanded .dropdown-content {
             display: block;
             opacity: 1;
+            transform: scaleY(1);
         }
 
         .dropdown-content a {
@@ -83,239 +99,78 @@
             display: block;
         }
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Back Button for Mobile */
-        .back-button {
-            display: none;
-            background-color: white;
-            color: black;
-            border: none;
-            padding: 8px 16px;
-            margin-top: 8px;
-            margin-bottom: 8px;
-            border-radius: 15px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 14px;
-            width: 150%; /* Make the back button wide */
-        }
-
-        .back-button:hover {
-            background-color: #555;
-            color: white;
-        }
-
-        /* Toggle Button */
-        .toggle-button {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .toggle-button:hover {
-            background-color: #555;
-        }
-
-        /* Greyed Background when Dropdown is Open with Reduced Blur */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            z-index: 5;
-            display: none;
-            backdrop-filter: blur(5px);
-        }
-
-        /* For Mobile Devices */
-        @media screen and (max-width: 768px) {
-            .topnav {
-                width: 100%;
-                height: auto;
-                padding: 15px;
-                flex-direction: column;
-                align-items: center;
-                margin-top: -5; /* Adjusted to bring the navbar closer to the top */
+            .dropdown-content a:hover {
+                background-color: #ddd;
             }
-
-            .dropdown-content {
-                width: 100%;
-                position: relative;
-                top: 0;
-                opacity: 0;
-                display: none;
-            }
-
-            .topnav.expanded .dropdown-content {
-                display: block;
-                width: 100%;
-            }
-
-            /* Display the back button in mobile */
-            .back-button {
-                display: block;
-                margin-top: 20px;
-                font-size: 16px;
-                width: 100%;
-            }
-
-            .topnav a {
-                color: white;
-                padding: 12px 16px;
-                display: block;
-                text-decoration: none;
-                text-align: center;
-            }
-        }
-
-        /* For Tablet and PC (non-mobile) */
-        @media screen and (min-width: 769px) {
-            .dropdown-content {
-                display: none;
-            }
-
-            .topnav.expanded .dropdown-content {
-                display: none;
-            }
-
-            /* Display links inline horizontally when expanded */
-            .topnav.expanded a {
-                display: inline-block;
-                padding: 10px 15px;
-                text-decoration: none;
-                color: rgb(255, 255, 255);
-            }
-
-            .topnav a {
-                color: rgb(255, 255, 255);
-                padding: 12px 16px;
-                display: block;
-                text-decoration: none;
-                text-align: center;
-            }
-
-            /* Make dropdown content inline on desktop */
-            .topnav.expanded .dropdown-content {
-                display: block;
-                position: relative;
-                top: 0;
-                opacity: 1;
-                width: auto;
-                box-shadow: none;
-                margin: 0;
-            }
-
-            /* Hide the "Move" button on PC when dropdown is expanded */
-            .topnav.expanded .toggle-button {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay" onclick="closeDropdown()"></div>
-    <button class="toggle-button" onclick="history.back()">Go Back</button>
 
     <div class="nav-container">
         <div class="topnav" id="navbar">
             <div class="dropdown" id="menuDropdown">
-                <a href="#" class="active" onclick="toggleDropdown()"  style="margin-left: -25px;">Main Menu</a>
-                <button class="toggle-button" onclick="toggleNavbar()">Open</button>
+                <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">Main Menu</span>
                 <div class="dropdown-content" id="dropdownContent">
-                    <a style="color: rgb(0, 0, 0);" href="/index.htm">Home (Page 1)</a>
-                    <a style="color: rgb(0, 0, 0);" href="/index%20-%20Copy.htm">Page 2</a>
-                    <a style="color: rgb(0, 0, 0);" href="#contact">Contact</a>
-                    <a style="color: rgb(0, 0, 0);" href="/Youtube%20Video.html">Youtube Video</a>
-                    <a style="color: rgb(0, 0, 0);" href="#more">More Option</a>
-                    <a style="color: rgb(0, 0, 0);" href="#more2">More Option 2</a>
-                    <a style="color: rgb(0, 0, 0);" href="#more3">More Option 3</a>
-                    <a style="color: rgb(0, 0, 0);" href="#more4">More Option 4</a>
-                    <a style="color: rgb(0, 0, 0);" href="/index.html">Back</a>
-                    <!-- Back Button for Mobile -->
+                    <a href="/index.htm">Home (Page 1)</a>
+                    <a href="/index%20-%20Copy.htm">Page 2</a>
+                    <a href="#contact">Contact</a>
+                    <a href="/Youtube%20Video.html">Youtube Video</a>
+                    <a href="#more">More Option</a>
+                    <a href="#more2">More Option 2</a>
+                    <a href="#more3">More Option 3</a>
+                    <a href="#more4">More Option 4</a>
+                    <a href="#more5">More Option 5</a>
+                    <a href="#more6">More Option 6</a>
+                    <a href="/index.html">Back</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let isExpanded = false;
-        let isDropdownOpen = false;
+        let menuExpanded = false;
 
-        // Toggle Navbar
-        function toggleNavbar() {
-            const navbar = document.getElementById("navbar");
-            const menuDropdown = document.getElementById("menuDropdown");
-
-            if (isExpanded) {
-                navbar.classList.remove("expanded");
-                menuDropdown.classList.remove("open");
-                document.getElementById("overlay").style.display = "none"; // Hide overlay
-            } else {
-                navbar.classList.add("expanded");
-                menuDropdown.classList.add("open");
-                document.getElementById("overlay").style.display = "block"; // Show overlay
-            }
-
-            // Toggle the expanded state
-            isExpanded = !isExpanded;
+        function expandIsland() {
+            document.getElementById('navbar').classList.add('expanded');
+            document.getElementById('dropdownContent').style.display = 'block';
+            document.getElementById('dropdownContent').style.opacity = '1';
+            document.getElementById('dropdownContent').style.transform = 'scaleY(1)';
         }
 
-        // Toggle the dropdown open or close
+        function collapseIsland() {
+            if (!menuExpanded) {
+                document.getElementById('navbar').classList.remove('expanded');
+                document.getElementById('dropdownContent').style.opacity = '0';
+                document.getElementById('dropdownContent').style.transform = 'scaleY(0)';
+                setTimeout(() => {
+                    document.getElementById('dropdownContent').style.display = 'none';
+                }, 400);
+            }
+        }
+
         function toggleDropdown() {
-            const menuDropdown = document.getElementById("menuDropdown");
-
-            if (isDropdownOpen) {
-                menuDropdown.classList.remove("open");
-                document.getElementById("overlay").style.display = "none"; // Hide overlay
+            menuExpanded = !menuExpanded;
+            if (menuExpanded) {
+                expandIsland();
             } else {
-                menuDropdown.classList.add("open");
-                document.getElementById("overlay").style.display = "block"; // Show overlay
-            }
-
-            isDropdownOpen = !isDropdownOpen;
-        }
-
-        // Close dropdown when clicking outside
-        function closeDropdown() {
-            if (isDropdownOpen) {
-                const menuDropdown = document.getElementById("menuDropdown");
-                menuDropdown.classList.remove("open");
-                document.getElementById("overlay").style.display = "none"; // Hide overlay
-                isDropdownOpen = false;
+                collapseIsland();
             }
         }
 
-        // Function for mobile back button
-        function goBack() {
-            const backButton = document.getElementById("backButton");
-            const dropdownContent = document.getElementById("dropdownContent");
-            const menuDropdown = document.getElementById("menuDropdown");
-            const navbar = document.getElementById("navbar");
+        document.getElementById('navbar').addEventListener('mouseenter', expandIsland);
+        document.getElementById('navbar').addEventListener('mouseleave', function (event) {
+            if (!document.getElementById('dropdownContent').contains(event.relatedTarget)) {
+                collapseIsland();
+            }
+        });
 
-            // Hide dropdown and reset the button and overlay
-            dropdownContent.style.display = "none";
-            backButton.style.display = "none";
-            navbar.classList.remove("expanded");
-            menuDropdown.classList.remove("open");
-            document.getElementById("overlay").style.display = "none"; // Hide overlay
+        document.getElementById('dropdownContent').addEventListener('mouseleave', function (event) {
+            if (!document.getElementById('navbar').contains(event.relatedTarget)) {
+                collapseIsland();
+            }
+        });
 
-            // Reset states
-            isExpanded = false;
-            isDropdownOpen = false;
-        }
     </script>
+
 </body>
 </html>
