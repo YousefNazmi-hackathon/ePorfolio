@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple iPhones</title>
+    <title>My ePorfolio</title>
     <style>
         body {
             background-color: rgb(245, 245, 220);
@@ -111,7 +111,7 @@
         /* Toggle Button */
         .toggle-button {
             position: absolute;
-            right: 20px;
+            right: 5px;
             top: 50%;
             transform: translateY(-50%);
             background-color: black;
@@ -227,12 +227,13 @@
 </head>
 <body>
     <div class="overlay" id="overlay" onclick="closeDropdown()"></div>
+    <button class="toggle-button" onclick="history.back()">Go Back</button>
 
     <div class="nav-container">
         <div class="topnav" id="navbar">
             <div class="dropdown" id="menuDropdown">
-                <a href="#" class="active" onclick="toggleDropdown()">Menu</a>
-                <button class="toggle-button" onclick="toggleNavbar()">Open/Close</button>
+                <a href="#" class="active" onclick="toggleDropdown()"  style="margin-left: -25px;">Main Menu</a>
+                <button class="toggle-button" onclick="toggleNavbar()">Open</button>
                 <div class="dropdown-content" id="dropdownContent">
                     <a style="color: rgb(0, 0, 0);" href="/index.htm">Home (Page 1)</a>
                     <a style="color: rgb(0, 0, 0);" href="/index%20-%20Copy.htm">Page 2</a>
@@ -242,7 +243,7 @@
                     <a style="color: rgb(0, 0, 0);" href="#more2">More Option 2</a>
                     <a style="color: rgb(0, 0, 0);" href="#more3">More Option 3</a>
                     <a style="color: rgb(0, 0, 0);" href="#more4">More Option 4</a>
-                    <a style="color: rgb(0, 0, 0);" href="/ePorfolio">Back</a>
+                    <a style="color: rgb(0, 0, 0);" href="/index.html">Back</a>
                     <!-- Back Button for Mobile -->
                 </div>
             </div>
