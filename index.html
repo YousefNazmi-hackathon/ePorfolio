@@ -42,10 +42,10 @@
             left: 10px;
         }
 
-            .topnav.expanded {
-                width: 120px;
-                height: 400px;
-            }
+        .topnav.expanded {
+            width: 120px;
+            height: 400px;
+        }
 
         .dropdown {
             text-align: center;
@@ -101,44 +101,86 @@
             position: relative;
         }
 
-            .dropdown-content a:hover::after {
-                content: attr(data-title);
-                position: absolute;
-                top: 0;
-                left: 100%;
-                margin-left: 10px;
-                background-color: #333;
-                color: white;
-                padding: 5px;
-                border-radius: 5px;
-                white-space: nowrap;
-                font-size: 14px;
-            }
+        .dropdown-content a:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            top: 0;
+            left: 100%;
+            margin-left: 10px;
+            background-color: #333;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 14px;
+        }
 
-            .dropdown-content a:hover {
-                background-color: #ddd;
-            }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
 
-        .resume-section {
-            margin-top: 100px;
-            padding: 20px;
+        /* Footer styles */
+        .footer {
+            position: relative;
+            bottom: 0;
+            width: 120%;  /* Increase the width to make the footer wider than the screen */
+            left: -10%;  /* Move the footer to the left */
+            background-color: #333;
+            color: white;
             text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
         }
 
-            .resume-section h1 {
-                font-size: 36px;
-                margin-bottom: 20px;
-            }
-
-            .resume-section p {
-                font-size: 18px;
-                margin-bottom: 40px;
-                color: #666;
-            }
-
-        body {
-            overflow-y: scroll;
+        /* Styling the contact info inside the footer to stay on the same line */
+        .footer .contact {
+            display: inline-block;
+            margin-right: 20px;
         }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            padding: 0 5px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Phone Number Section */
+        .clickable-phone {
+            color: #007BFF;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Style for the 'Copied!' message */
+        .copy-message {
+            display: none;
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        /* Optional: Animation for the message */
+        .copy-message.show {
+            animation: fadeInOut 2s;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 1; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        img {
+            display: block;
+            margin-right: 270px; /* Adjust the margin as needed */
+            margin-left: 50px;    /* Adjust the margin as needed */
+        }
+
+
     </style>
 </head>
 <body>
@@ -151,23 +193,56 @@
                     <i class="fas fa-bars"></i>
                 </span>
                 <div class="dropdown-content" id="dropdownContent">
-                    <a href="/ePorfolio/index.html" data-title="Home"><i class="fas fa-home"></i></a>
-                    <a href="/ePorfolio/resume.html" data-title="Resume"><i class="fas fa-file-alt"></i></a>
-                    <a href="#contact" data-title="Contact"><i class="fas fa-address-book"></i></a>
-                    <a href="/Youtube%20Video.html" data-title="Video"><i class="fas fa-video"></i></a>
-                    <a href="#more" data-title="More"><i class="fas fa-ellipsis-h"></i></a>
-                    <a href="#more" data-title="More"><i class="fas fa-ellipsis-h"></i></a>
-                    <a href="/index.html" data-title="Back"><i class="fas fa-arrow-left"></i></a>
+                    <a href="/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-home"></i>
+                        <span class="tooltip" style="display:none;">Home</span>
+                    </a>
+                    <a href="/index%20-%20Copy.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="tooltip" style="display:none;">Resume</span>
+                    </a>
+                    <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-address-book"></i>
+                        <span class="tooltip" style="display:none;">Contact</span>
+                    </a>
+                    <a href="/Youtube%20Video.html" data-title="Video" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-video"></i>
+                        <span class="tooltip" style="display:none;">Video</span>
+                    </a>
+                    <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <span class="tooltip" style="display:none;">More</span>
+                    </a>
+                    <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                        <i class="fas fa-arrow-left"></i>
+                        <span class="tooltip" style="display:none;">Back</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Resume Section Without PDF -->
     <div class="resume-section">
-        <h1>My Resume</h1>
-        <p>Here is my resume</p>
+        <h2 style="text-align: center; margin-left: 50px;">About Me</h2>
+        <img style="width: auto; height: auto; margin-right: 200px;" src="C:\Users\Yousef Abdelsalam\Downloads\ePorfolio-main\me.png" alt="A image of me">
+        <p></p>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 my ePortfolio. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/about.html">About</a> | 
+            <div class="contact">
+                <p>Contact Us: 
+                <span id="9058651777" class="clickable-phone" onclick="copyPhoneNumber()">+1 (905) 865 1777</span>
+                </p>
+                <div id="copy-message" class="copy-message">Copied!</div>
+            </div>
+            | 
+            <a href="https://www.instagram.com/yousef_photography_2862?igsh=MW9hdGVxYTZxdGhmbQ%3D%3D&utm_source=qr">Social Media</a>
+        </div>
+    </footer>
 
     <script>
         let menuExpanded = false;
@@ -211,7 +286,35 @@
                 collapseIsland();
             }
         });
-    </script>
 
+        function copyPhoneNumber() {
+            const phoneNumber = document.getElementById("phone-number").innerText;  // Get the phone number text
+            const input = document.createElement("input");  // Create an input element
+            input.setAttribute("value", phoneNumber);  // Set the phone number as its value
+            document.body.appendChild(input);  // Append the input to the body
+            input.select();  // Select the text in the input
+            document.execCommand("copy");  // Execute the copy command
+            document.body.removeChild(input);  // Remove the input element after copying
+
+            // Show the "Copied!" message
+            const message = document.getElementById("copy-message");
+            message.classList.add("show");  // Add the 'show' class to display the message
+            setTimeout(() => {
+                message.classList.remove("show");  // Remove the 'show' class after 2 seconds
+            }, 2000);
+        }
+
+
+
+        function showTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'inline-block';
+        }
+
+        function hideTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
