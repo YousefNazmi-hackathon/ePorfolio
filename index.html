@@ -22,7 +22,7 @@
 
         /* Footer will stay at the bottom */
         .footer {
-            margin-top: auto;  /* Push the footer to the bottom */
+            margin-top: auto; /* Push the footer to the bottom */
             width: 100%;
             background-color: #333;
             color: white;
@@ -31,20 +31,20 @@
             font-size: 14px;
         }
 
-        .footer .contact {
-            display: inline-block;
-            margin-right: 20px;
-        }
+            .footer .contact {
+                display: inline-block;
+                margin-right: 20px;
+            }
 
-        .footer a {
-            color: white;
-            text-decoration: none;
-            padding: 0 5px;
-        }
+            .footer a {
+                color: white;
+                text-decoration: none;
+                padding: 0 5px;
+            }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+                .footer a:hover {
+                    text-decoration: underline;
+                }
 
         /* Phone Number Section */
         .clickable-phone {
@@ -62,15 +62,23 @@
             font-weight: bold;
         }
 
-        /* Optional: Animation for the message */
-        .copy-message.show {
-            animation: fadeInOut 2s;
-        }
+            /* Optional: Animation for the message */
+            .copy-message.show {
+                animation: fadeInOut 2s;
+            }
 
         @keyframes fadeInOut {
-            0% { opacity: 1; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         /* About Section Styles */
@@ -101,7 +109,7 @@
             border: none;
             color: black;
             border-radius: 50px;
-            width: 200px;  /* Set the button width to be wider */
+            width: 200px; /* Set the button width to be wider */
             height: 50px;
             font-size: 16px;
             cursor: pointer;
@@ -113,9 +121,9 @@
             margin-right: auto; /* Center the button */
         }
 
-        .more-button:hover {
-            background-color: #f1c40f;  /* Hover effect */
-        }
+            .more-button:hover {
+                background-color: #f1c40f; /* Hover effect */
+            }
 
         /* Menu Styles */
         /* Keep the top black bar visible */
@@ -127,14 +135,14 @@
             align-items: center; /* Vertically center the items */
             padding: 0 10px; /* Add some padding around the bar */
         }
-        /* Update top navigation bar height and font size */
-        /* Make the hamburger icon bigger */
-        .topnav .dropdown .dropdown-toggle {
-            color: white;
-            font-size: 40px; /* Larger hamburger icon */
-            padding: 15px 20px; /* Adjust padding for better click area */
-            cursor: pointer;
-        }
+            /* Update top navigation bar height and font size */
+            /* Make the hamburger icon bigger */
+            .topnav .dropdown .dropdown-toggle {
+                color: white;
+                font-size: 40px; /* Larger hamburger icon */
+                padding: 15px 20px; /* Adjust padding for better click area */
+                cursor: pointer;
+            }
 
         /* Make the dropdown links display text beside the icons */
         .dropdown-content a {
@@ -160,19 +168,31 @@
             min-width: 220px; /* Ensure it’s wide enough to fit the text */
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
             z-index: 1;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for the dropdown */
+            top: 70px; /* Position the dropdown below the topnav */
         }
 
-            /* Show text next to icons in the dropdown */
+            .dropdown-content.show {
+                display: block;
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
             .dropdown-content a:hover {
                 background-color: #444;
             }
 
-        /* Keep text beside icons at all times (no need for hover effect) */
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .main-content {
+            margin-top: 90px; /* Add margin-top to push the content below the fixed navbar */
         }
 
-
+        .blurred-background {
+            filter: blur(4px);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -183,33 +203,33 @@
             <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">
                 <i class="fas fa-bars"></i>
             </span>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-home"></i>
-                    <span class="tooltip" style="display:none;">Home</span>
-                </a>
-                <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="tooltip" style="display:none;">Resume</span>
-                </a>
-                <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-address-book"></i>
-                    <span class="tooltip" style="display:none;">Contact</span>
-                </a>
-                <a href="/ePorfolio/Photos.html" data-title="Camera" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-camera"></i>
-                    <span class="tooltip" style="display:none;">My Photography</span>
-                </a>
-                <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-ellipsis-h"></i>
-                    <span class="tooltip" style="display:none;">More</span>
-                </a>
-                <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-arrow-left"></i>
-                    <span class="tooltip" style="display:none;">Back</span>
-                </a>
-            </div>
         </div>
+    </div>
+    <div class="dropdown-content" id="dropdownContent">
+        <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-home"></i>
+            <span class="tooltip" style="display:none;">Home</span>
+        </a>
+        <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-file-alt"></i>
+            <span class="tooltip" style="display:none;">Resume</span>
+        </a>
+        <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-address-book"></i>
+            <span class="tooltip" style="display:none;">Contact</span>
+        </a>
+        <a href="/ePorfolio/Photos.html" data-title="Camera" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-camera"></i>
+            <span class="tooltip" style="display:none;">My Photography</span>
+        </a>
+        <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-ellipsis-h"></i>
+            <span class="tooltip" style="display:none;">More</span>
+        </a>
+        <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-arrow-left"></i>
+            <span class="tooltip" style="display:none;">Back</span>
+        </a>
     </div>
 
     <!-- About Me Section -->
@@ -225,7 +245,7 @@
                 Let's create something awesome!
             </p>
 
-            <button class="more-button" type="button">More</button> 
+            <button class="more-button" type="button">More</button>
         </div>
     </div>
 
@@ -233,14 +253,15 @@
     <footer class="footer">
         <p>&copy; 2025 my ePortfolio. All rights reserved.</p>
         <div class="footer-links">
-            <a href="/about.html">About</a> | 
+            <a href="/about.html">About</a> |
             <div class="contact">
-                <p>Contact Us: 
-                <span id="9058651777" class="clickable-phone" onclick="copyPhoneNumber()">+1 (905) 865 1777</span>
+                <p>
+                    Contact Us:
+                    <span id="9058651777" class="clickable-phone" onclick="copyPhoneNumber()">+1 (905) 865 1777</span>
                 </p>
                 <div id="copy-message" class="copy-message">Copied!</div>
             </div>
-            | 
+            |
             <a href="https://www.instagram.com/yousef_photography_2862?igsh=MW9hdGVxYTZxdGhmbQ%3D%3D&utm_source=qr">Social Media</a>
         </div>
     </footer>
@@ -285,6 +306,13 @@
         document.getElementById('dropdownContent').addEventListener('mouseleave', function (event) {
             if (!document.getElementById('navbar').contains(event.relatedTarget)) {
                 collapseIsland();
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            const isClickInside = document.getElementById('navbar').contains(event.target);
+            if (!isClickInside) {
+                document.getElementById('dropdownContent').classList.remove('show');
             }
         });
 
