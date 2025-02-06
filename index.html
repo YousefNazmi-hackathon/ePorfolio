@@ -6,125 +6,24 @@
     <title>My ePortfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            background-color: rgb(245, 245, 220);
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+        /* Set the full height of html and body */
+        html, body {
             height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(245, 245, 220);
+            font-family: Arial, Helvetica, sans-serif;
             overflow-x: hidden;
         }
 
-        .nav-container {
-            display: flex;
-            align-items: flex-start;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-        }
-
-        .topnav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #333;
-            border-radius: 25px;
-            width: 50px;
-            height: 50px;
-            transition: height 0.4s ease-in-out, top 0.3s ease;
-            transform-origin: top left;
-            overflow: hidden;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 10px 0;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-        }
-
-        .topnav.expanded {
-            width: 120px;
-            height: 400px;
-        }
-
-        .dropdown {
-            text-align: center;
-            width: 100%;
-        }
-
-        .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            z-index: 20;
-            transition: top 0.3s ease;
-        }
-
-        .topnav.expanded .dropdown-toggle {
-            top: 5%;
-        }
-
-        .dropdown-content {
-            display: none;
-            background-color: #f1f1f1;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            width: 100%;
-            opacity: 0;
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-            position: absolute;
-            top: 50px;
-            z-index: 15;
-        }
-
-        .topnav.expanded .dropdown-content {
-            display: block;
-            opacity: 1;
-            transform: scaleY(1);
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 24px;
-            position: relative;
-        }
-
-        .dropdown-content a:hover::after {
-            content: attr(data-title);
-            position: absolute;
-            top: 0;
-            left: 100%;
-            margin-left: 10px;
-            background-color: #333;
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Footer styles */
+        /* Footer will stay at the bottom */
         .footer {
-            position: relative;
-            bottom: 0;
-            width: 120%;  /* Increase the width to make the footer wider than the screen */
-            left: -10%;  /* Move the footer to the left */
+            margin-top: auto;  /* Push the footer to the bottom */
+            width: 100%;
             background-color: #333;
             color: white;
             text-align: center;
@@ -132,7 +31,6 @@
             font-size: 14px;
         }
 
-        /* Styling the contact info inside the footer to stay on the same line */
         .footer .contact {
             display: inline-block;
             margin-right: 20px;
@@ -174,10 +72,104 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
-        img {
+
+        /* About Section Styles */
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items starting from left */
+            gap: 30px; /* Adjust spacing between image and text */
+            margin: 50px auto;
+            max-width: 1150px;
+        }
+
+        .about-image {
+            width: 500px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .about-text {
+            font-size: 20px;
+            line-height: 1.6;
+            max-width: 800px; /* Limits text width for better readability */
+        }
+
+        /* Button styles */
+        .more-button {
+            background-color: yellow;
+            border: none;
+            color: black;
+            border-radius: 50px;
+            width: 200px;  /* Set the button width to be wider */
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px; /* Vertically centers the text */
+            margin-top: 20px;
             display: block;
-            margin-right: 270px; /* Adjust the margin as needed */
-            margin-left: 50px;    /* Adjust the margin as needed */
+            margin-left: auto;
+            margin-right: auto; /* Center the button */
+        }
+
+        .more-button:hover {
+            background-color: #f1c40f;  /* Hover effect */
+        }
+
+        /* Menu Styles */
+        /* Keep the top black bar visible */
+        .topnav {
+            background-color: #333; /* Black background */
+            overflow: hidden;
+            height: 70px; /* Increased height for better visibility */
+            display: flex;
+            align-items: center; /* Vertically center the items */
+            padding: 0 10px; /* Add some padding around the bar */
+        }
+        /* Update top navigation bar height and font size */
+        /* Make the hamburger icon bigger */
+        .topnav .dropdown .dropdown-toggle {
+            color: white;
+            font-size: 40px; /* Larger hamburger icon */
+            padding: 15px 20px; /* Adjust padding for better click area */
+            cursor: pointer;
+        }
+
+        /* Make the dropdown links display text beside the icons */
+        .dropdown-content a {
+            color: white;
+            padding: 16px 20px; /* More padding for larger clickable area */
+            font-size: 18px; /* Set a consistent text size */
+            text-decoration: none;
+            display: flex; /* Align text and icon horizontally */
+            align-items: center; /* Vertically center the items */
+        }
+
+            /* Increase the icon size */
+            .dropdown-content a i {
+                margin-right: 10px; /* Space between icon and text */
+                font-size: 22px; /* Larger icons */
+            }
+
+        /* Ensure the dropdown menu has consistent width */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 220px; /* Ensure it’s wide enough to fit the text */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+            z-index: 1;
+        }
+
+            /* Show text next to icons in the dropdown */
+            .dropdown-content a:hover {
+                background-color: #444;
+            }
+
+        /* Keep text beside icons at all times (no need for hover effect) */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
 
@@ -186,46 +178,55 @@
 <body>
 
     <!-- Dynamic Island Navigation Menu -->
-    <div class="nav-container">
-        <div class="topnav" id="navbar">
-            <div class="dropdown" id="menuDropdown">
-                <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">
-                    <i class="fas fa-bars"></i>
-                </span>
-                <div class="dropdown-content" id="dropdownContent">
-                    <a href="/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-home"></i>
-                        <span class="tooltip" style="display:none;">Home</span>
-                    </a>
-                    <a href="/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-file-alt"></i>
-                        <span class="tooltip" style="display:none;">Resume</span>
-                    </a>
-                    <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-address-book"></i>
-                        <span class="tooltip" style="display:none;">Contact</span>
-                    </a>
-                    <a href="/Youtube%20Video.html" data-title="Video" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-video"></i>
-                        <span class="tooltip" style="display:none;">Video</span>
-                    </a>
-                    <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-ellipsis-h"></i>
-                        <span class="tooltip" style="display:none;">More</span>
-                    </a>
-                    <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                        <i class="fas fa-arrow-left"></i>
-                        <span class="tooltip" style="display:none;">Back</span>
-                    </a>
-                </div>
+    <div class="topnav" id="navbar">
+        <div class="dropdown">
+            <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">
+                <i class="fas fa-bars"></i>
+            </span>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-home"></i>
+                    <span class="tooltip" style="display:none;">Home</span>
+                </a>
+                <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="tooltip" style="display:none;">Resume</span>
+                </a>
+                <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-address-book"></i>
+                    <span class="tooltip" style="display:none;">Contact</span>
+                </a>
+                <a href="/Youtube%20Video.html" data-title="Video" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-video"></i>
+                    <span class="tooltip" style="display:none;">Video</span>
+                </a>
+                <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <span class="tooltip" style="display:none;">More</span>
+                </a>
+                <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="tooltip" style="display:none;">Back</span>
+                </a>
             </div>
         </div>
     </div>
 
+    <!-- About Me Section -->
     <div class="resume-section">
-        <h2 style="text-align: center; margin-left: 50px;">About Me</h2>
-        <img style="width: auto; height: auto; margin-right: 200px;" src="\me.png" alt="A image of me">
-        <p></p>
+        <h2 style="text-align: center; margin-top: 50px;">About Me</h2>
+        <div class="about-container">
+            <img class="about-image" src="me.jpg" alt="An image of me">
+            <p class="about-text">
+                Hi, I'm Yousef Abdelsalam, a passionate coder and builder. I love turning ideas into reality through code,
+                whether it's web apps, software, or creative projects. I'm always exploring new technologies and
+                challenging myself to build things that make an impact.
+                <br><br>
+                Let's create something awesome!
+            </p>
+
+            <button class="more-button" type="button">More</button> 
+        </div>
     </div>
 
     <!-- Footer Section -->
@@ -303,8 +304,6 @@
                 message.classList.remove("show");  // Remove the 'show' class after 2 seconds
             }, 2000);
         }
-
-
 
         function showTooltip(element) {
             const tooltip = element.querySelector('.tooltip');
