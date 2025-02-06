@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ePortfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Set the full height of html and body */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(245, 245, 220);
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Footer will stay at the bottom */
+        .footer {
+            margin-top: auto; /* Push the footer to the bottom */
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+            .footer .contact {
+                display: inline-block;
+                margin-right: 20px;
+            }
+
+            .footer a {
+                color: white;
+                text-decoration: none;
+                padding: 0 5px;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Phone Number Section */
+        .clickable-phone {
+            color: #007BFF;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Style for the 'Copied!' message */
+        .copy-message {
+            display: none;
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+            /* Optional: Animation for the message */
+            .copy-message.show {
+                animation: fadeInOut 2s;
+            }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Resume Section Styles */
+        .resume-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            column-gap: 10px; /* Set horizontal gap between images to 10px */
+            row-gap: 5px; /* Keep vertical gap as it is or adjust if needed */
+            margin-top: 20px;
+        }
+
+
+        .image-container {
+            text-align: center;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            max-width: 400px; /* Set a maximum width for the images */
+            border-radius: 10px;
+        }
+
+        .image-caption {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Menu Styles */
+        .topnav {
+            background-color: #333; /* Black background */
+            overflow: hidden;
+            height: 70px; /* Increased height for better visibility */
+            display: flex;
+            align-items: center; /* Vertically center the items */
+            padding: 0 10px; /* Add some padding around the bar */
+            position: fixed; /* Fixed to the top */
+            top: 0;
+            width: 100%; /* Make sure the nav takes up full width */
+            z-index: 1000; /* Ensure it's on top of other elements */
+        }
+
+            .topnav .dropdown .dropdown-toggle {
+                color: white;
+                font-size: 40px; /* Larger hamburger icon */
+                padding: 15px 20px; /* Adjust padding for better click area */
+                cursor: pointer;
+            }
+
+        .dropdown-content a {
+            color: white;
+            padding: 16px 20px; /* More padding for larger clickable area */
+            font-size: 18px; /* Set a consistent text size */
+            text-decoration: none;
+            display: flex; /* Align text and icon horizontally */
+            align-items: center; /* Vertically center the items */
+        }
+
+            .dropdown-content a i {
+                margin-right: 10px; /* Space between icon and text */
+                font-size: 22px; /* Larger icons */
+            }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 220px; /* Ensure it’s wide enough to fit the text */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            z-index: 1;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for the dropdown */
+            top: 70px; /* Position the dropdown below the topnav */
+        }
+
+            .topnav:hover + .dropdown-content,
+            .dropdown-content:hover {
+                display: block;
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
+            .dropdown-content a:hover {
+                background-color: #444;
+            }
+
+        .main-content {
+            margin-top: 90px; /* Add margin-top to push the content below the fixed navbar */
+        }
+
+        .blurred-background {
+            filter: blur(4px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Island Navigation Menu -->
+    <div class="topnav" id="navbar">
+        <div class="dropdown">
+            <span class="dropdown-toggle" id="mainMenu">
+                <i class="fas fa-bars"></i>
+            </span>
+        </div>
+    </div>
+    <div class="dropdown-content" id="dropdownContent">
+        <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-home"></i>
+            <span class="tooltip" style="display:none;">Home</span>
+        </a>
+        <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-file-alt"></i>
+            <span class="tooltip" style="display:none;">Resume</span>
+        </a>
+        <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-address-book"></i>
+            <span class="tooltip" style="display:none;">Contact</span>
+        </a>
+        <a href="/ePorfolio/Photos.html" data-title="Camera" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-camera"></i>
+            <span class="tooltip" style="display:none;">My Photography</span>
+        </a>
+        <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-ellipsis-h"></i>
+            <span class="tooltip" style="display:none;">More</span>
+        </a>
+        <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-arrow-left"></i>
+            <span class="tooltip" style="display:none;">Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Photography Section with Images -->
+        <div class="resume-section">
+            <h1>My Photography</h1>
+            <p>Here are some Photos I made over the years</p>
+            <div class="image-grid">
+                <div class="image-container">
+                    <img src="image1.jpg" alt="Photo 1">
+                    <div class="image-caption">My first Professional Photo</div>
+                </div>
+                <div class="image-container">
+                    <img src="image2.jpg" alt="Photo 2">
+                    <div class="image-caption">My Cat under the blanket</div>
+                </div>
+                <div class="image-container">
+                    <img src="image3.jpg" alt="Photo 3">
+                    <div class="image-caption">Rolls Royce in the Garage of a school</div>
+                </div>
+                <div class="image-container">
+                    <img src="image4.jpg" alt="Photo 4">
+                    <div class="image-caption">My Cat Again </div>
+                </div>
+                <div class="image-container">
+                    <img src="image5.jpg" alt="Photo 5">
+                    <div class="image-caption">My Brother infront of the light</div>
+                </div>
+                <div class="image-container">
+                    <img src="image6.jpg" alt="Photo 6">
+                    <div class="image-caption">Car Moving (Stopped in Motion)</div>
+                </div>
+                <div class="image-container">
+                    <img src="image7.jpg" alt="Photo 7">
+                    <div class="image-caption">My Brother on Phones</div>
+                </div>
+                <div class="image-container">
+                    <img src="image8.jpg" alt="Photo 8">
+                    <div class="image-caption">Lakeshore</div>
+                </div>
+                <div class="image-container">
+                    <img src="image9.jpg" alt="Photo 9">
+                    <div class="image-caption">This is a HDR image of the the school called NORA FRANCES HENDERSON</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 my ePortfolio. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/about.html">About</a> |
+            <div class="contact">
+                <p>
+                    Contact Us:
+                    <span id="9058651777" class="clickable-phone" onclick="copyPhoneNumber()">+1 (905) 865 1777</span>
+                </p>
+                <div id="copy-message" class="copy-message">Copied!</div>
+            </div>
+            |
+            <a href="https://www.instagram.com/yousef_photography_2862?igsh=MW9hdGVxYTZxdGhmbQ%3D%3D&utm_source=qr">Social Media</a>
+        </div>
+    </footer>
+
+    <script>
+        function copyPhoneNumber() {
+            const phoneNumber = document.getElementById("phone-number").innerText;
+            const input = document.createElement("input");
+            input.setAttribute("value", phoneNumber);
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+
+            const message = document.getElementById("copy-message");
+            message.classList.add("show");
+            setTimeout(() => {
+                message.classList.remove("show");
+            }, 2000);
+        }
+
+        function showTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'inline-block';
+        }
+
+        function hideTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+
+
