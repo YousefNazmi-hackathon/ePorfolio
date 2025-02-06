@@ -22,7 +22,7 @@
 
         /* Footer will stay at the bottom */
         .footer {
-            margin-top: auto;  /* Push the footer to the bottom */
+            margin-top: auto; /* Push the footer to the bottom */
             width: 100%;
             background-color: #333;
             color: white;
@@ -31,20 +31,20 @@
             font-size: 14px;
         }
 
-        .footer .contact {
-            display: inline-block;
-            margin-right: 20px;
-        }
+            .footer .contact {
+                display: inline-block;
+                margin-right: 20px;
+            }
 
-        .footer a {
-            color: white;
-            text-decoration: none;
-            padding: 0 5px;
-        }
+            .footer a {
+                color: white;
+                text-decoration: none;
+                padding: 0 5px;
+            }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+                .footer a:hover {
+                    text-decoration: underline;
+                }
 
         /* Phone Number Section */
         .clickable-phone {
@@ -62,63 +62,36 @@
             font-weight: bold;
         }
 
-        /* Optional: Animation for the message */
-        .copy-message.show {
-            animation: fadeInOut 2s;
-        }
+            /* Optional: Animation for the message */
+            .copy-message.show {
+                animation: fadeInOut 2s;
+            }
 
         @keyframes fadeInOut {
-            0% { opacity: 1; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
-        /* About Section Styles */
-        .about-container {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align items starting from left */
-            gap: 30px; /* Adjust spacing between image and text */
-            margin: 50px auto;
-            max-width: 1150px;
-        }
-
-        .about-image {
-            width: 500px; /* Adjust size as needed */
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .about-text {
-            font-size: 20px;
-            line-height: 1.6;
-            max-width: 800px; /* Limits text width for better readability */
-        }
-
-        /* Button styles */
-        .more-button {
-            background-color: yellow;
-            border: none;
-            color: black;
-            border-radius: 50px;
-            width: 200px;  /* Set the button width to be wider */
-            height: 50px;
-            font-size: 16px;
-            cursor: pointer;
+        /* Resume Section Styles */
+        .resume-section {
             text-align: center;
-            line-height: 50px; /* Vertically centers the text */
-            margin-top: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto; /* Center the button */
+            margin-top: 50px;
         }
 
-        .more-button:hover {
-            background-color: #f1c40f;  /* Hover effect */
+        .pdf-container {
+            margin-top: 20px;
         }
 
         /* Menu Styles */
-        /* Keep the top black bar visible */
         .topnav {
             background-color: #333; /* Black background */
             overflow: hidden;
@@ -126,17 +99,19 @@
             display: flex;
             align-items: center; /* Vertically center the items */
             padding: 0 10px; /* Add some padding around the bar */
-        }
-        /* Update top navigation bar height and font size */
-        /* Make the hamburger icon bigger */
-        .topnav .dropdown .dropdown-toggle {
-            color: white;
-            font-size: 40px; /* Larger hamburger icon */
-            padding: 15px 20px; /* Adjust padding for better click area */
-            cursor: pointer;
+            position: fixed; /* Fixed to the top */
+            top: 0;
+            width: 100%; /* Make sure the nav takes up full width */
+            z-index: 1000; /* Ensure it's on top of other elements */
         }
 
-        /* Make the dropdown links display text beside the icons */
+            .topnav .dropdown .dropdown-toggle {
+                color: white;
+                font-size: 40px; /* Larger hamburger icon */
+                padding: 15px 20px; /* Adjust padding for better click area */
+                cursor: pointer;
+            }
+
         .dropdown-content a {
             color: white;
             padding: 16px 20px; /* More padding for larger clickable area */
@@ -146,33 +121,44 @@
             align-items: center; /* Vertically center the items */
         }
 
-            /* Increase the icon size */
             .dropdown-content a i {
                 margin-right: 10px; /* Space between icon and text */
                 font-size: 22px; /* Larger icons */
             }
 
-        /* Ensure the dropdown menu has consistent width */
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #333;
             min-width: 220px; /* Ensure it’s wide enough to fit the text */
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
             z-index: 1;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for the dropdown */
+            top: 70px; /* Position the dropdown below the topnav */
         }
 
-            /* Show text next to icons in the dropdown */
+            .topnav:hover + .dropdown-content,
+            .dropdown-content:hover {
+                display: block;
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
             .dropdown-content a:hover {
                 background-color: #444;
             }
 
-        /* Keep text beside icons at all times (no need for hover effect) */
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .main-content {
+            margin-top: 90px; /* Add margin-top to push the content below the fixed navbar */
         }
 
-
+        .blurred-background {
+            filter: blur(4px);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -180,91 +166,94 @@
     <!-- Dynamic Island Navigation Menu -->
     <div class="topnav" id="navbar">
         <div class="dropdown">
-            <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">
+            <span class="dropdown-toggle" id="mainMenu">
                 <i class="fas fa-bars"></i>
             </span>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-home"></i>
-                    <span class="tooltip" style="display:none;">Home</span>
-                </a>
-                <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="tooltip" style="display:none;">Resume</span>
-                </a>
-                <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-address-book"></i>
-                    <span class="tooltip" style="display:none;">Contact</span>
-                </a>
-                <a href="/Youtube%20Video.html" data-title="Video" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-video"></i>
-                    <span class="tooltip" style="display:none;">Video</span>
-                </a>
-                <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-ellipsis-h"></i>
-                    <span class="tooltip" style="display:none;">More</span>
-                </a>
-                <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
-                    <i class="fas fa-arrow-left"></i>
-                    <span class="tooltip" style="display:none;">Back</span>
-                </a>
+        </div>
+    </div>
+    <div class="dropdown-content" id="dropdownContent">
+        <a href="/ePorfolio/index.html" data-title="Home" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-home"></i>
+            <span class="tooltip" style="display:none;">Home</span>
+        </a>
+        <a href="/ePorfolio/resume.html" data-title="Resume" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-file-alt"></i>
+            <span class="tooltip" style="display:none;">Resume</span>
+        </a>
+        <a href="#contact" data-title="Contact" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-address-book"></i>
+            <span class="tooltip" style="display:none;">Contact</span>
+        </a>
+        <a href="/ePorfolio/Photos.html" data-title="Camera" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-camera"></i>
+            <span class="tooltip" style="display:none;">My Photography</span>
+        </a>
+        <a href="#more" data-title="More" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-ellipsis-h"></i>
+            <span class="tooltip" style="display:none;">More</span>
+        </a>
+        <a href="/index.html" data-title="Back" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <i class="fas fa-arrow-left"></i>
+            <span class="tooltip" style="display:none;">Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Resume Section with PDF -->
+        <div class="resume-section">
+            <h1>My Resume</h1>
+            <p>Here is my resume</p>
+            <div class="pdf-container">
+                <iframe src="resume.pdf" width="1500px" height="1000px" style="border: none;"></iframe>
             </div>
         </div>
     </div>
 
-
-    <!-- Resume Section with PDF -->
-    <div class="resume-section">
-        <h1>My Resume</h1>
-        <p>Here is my resume</p>
-        <div class="pdf-container">
-            <iframe src="resume.pdf" width="100%" height="100%" style="border: none;"></iframe>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 my ePortfolio. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/about.html">About</a> |
+            <div class="contact">
+                <p>
+                    Contact Us:
+                    <span id="9058651777" class="clickable-phone" onclick="copyPhoneNumber()">+1 (905) 865 1777</span>
+                </p>
+                <div id="copy-message" class="copy-message">Copied!</div>
+            </div>
+            |
+            <a href="https://www.instagram.com/yousef_photography_2862?igsh=MW9hdGVxYTZxdGhmbQ%3D%3D&utm_source=qr">Social Media</a>
         </div>
-    </div>
+    </footer>
 
     <script>
-        let menuExpanded = false;
+        function copyPhoneNumber() {
+            const phoneNumber = document.getElementById("phone-number").innerText;
+            const input = document.createElement("input");
+            input.setAttribute("value", phoneNumber);
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
 
-        function expandIsland() {
-            document.getElementById('navbar').classList.add('expanded');
-            document.getElementById('dropdownContent').style.display = 'block';
-            document.getElementById('dropdownContent').style.opacity = '1';
-            document.getElementById('dropdownContent').style.transform = 'scaleY(1)';
+            const message = document.getElementById("copy-message");
+            message.classList.add("show");
+            setTimeout(() => {
+                message.classList.remove("show");
+            }, 2000);
         }
 
-        function collapseIsland() {
-            if (!menuExpanded) {
-                document.getElementById('navbar').classList.remove('expanded');
-                document.getElementById('dropdownContent').style.opacity = '0';
-                document.getElementById('dropdownContent').style.transform = 'scaleY(0)';
-                setTimeout(() => {
-                    document.getElementById('dropdownContent').style.display = 'none';
-                }, 400);
-            }
+        function showTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'inline-block';
         }
 
-        function toggleDropdown() {
-            menuExpanded = !menuExpanded;
-            if (menuExpanded) {
-                expandIsland();
-            } else {
-                collapseIsland();
-            }
+        function hideTooltip(element) {
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.style.display = 'none';
         }
-
-        document.getElementById('navbar').addEventListener('mouseenter', expandIsland);
-        document.getElementById('navbar').addEventListener('mouseleave', function (event) {
-            if (!document.getElementById('dropdownContent').contains(event.relatedTarget)) {
-                collapseIsland();
-            }
-        });
-
-        document.getElementById('dropdownContent').addEventListener('mouseleave', function (event) {
-            if (!document.getElementById('navbar').contains(event.relatedTarget)) {
-                collapseIsland();
-            }
-        });
     </script>
-
 </body>
 </html>
+
