@@ -140,8 +140,7 @@
             top: 70px; /* Position the dropdown below the topnav */
         }
 
-            .topnav:hover + .dropdown-content,
-            .dropdown-content:hover {
+            .dropdown-content.show {
                 display: block;
                 opacity: 1;
                 transform: scaleY(1);
@@ -166,7 +165,7 @@
     <!-- Dynamic Island Navigation Menu -->
     <div class="topnav" id="navbar">
         <div class="dropdown">
-            <span class="dropdown-toggle" id="mainMenu">
+            <span class="dropdown-toggle" id="mainMenu" onclick="toggleDropdown()">
                 <i class="fas fa-bars"></i>
             </span>
         </div>
@@ -253,7 +252,34 @@
             const tooltip = element.querySelector('.tooltip');
             tooltip.style.display = 'none';
         }
+
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdownContent');
+            dropdownContent.classList.toggle('show');
+        }
+
+        document.addEventListener('click', function (event) {
+            const isClickInside = document.getElementById('navbar').contains(event.target);
+            if (!isClickInside) {
+                document.getElementById('dropdownContent').classList.remove('show');
+            }
+        });
+
+        document.getElementById('navbar').addEventListener('mouseenter', function () {
+            document.getElementById('dropdownContent').classList.add('show');
+        });
+
+        document.getElementById('navbar').addEventListener('mouseleave', function (event) {
+            if (!document.getElementById('dropdownContent').contains(event.relatedTarget)) {
+                document.getElementById('dropdownContent').classList.remove('show');
+            }
+        });
+
+        document.getElementById('dropdownContent').addEventListener('mouseleave', function (event) {
+            if (!document.getElementById('navbar').contains(event.relatedTarget)) {
+                document.getElementById('dropdownContent').classList.remove('show');
+            }
+        });
     </script>
 </body>
 </html>
-
